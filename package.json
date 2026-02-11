@@ -1,0 +1,15 @@
+{
+  "name": "mini-ecommerce-api",
+  "version": "1.0.0",
+  "description": "Mini E-Commerce REST API built using Node.js and Express.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
+
