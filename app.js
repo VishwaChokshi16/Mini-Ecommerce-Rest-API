@@ -1,26 +1,28 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const errorHandler = require('./middleware/errorHandler');
+
 const app = express();
 
-// Middleware to parse JSON
+// JSON middleware
 app.use(express.json());
 
-// Import Routes
-const productRoutes = require('./routes/products');
-const userRoutes = require('./routes/users');
-const cartRoutes = require('./routes/cart');
-const orderRoutes = require('./routes/orders');
+// MongoDB connection
+mongoose.connect('mongodb://127.0.0.1:27017/ecommerceDB')
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error(err));
 
-// Use Routes
-app.use('/products', productRoutes);
-app.use('/users', userRoutes);
-app.use('/cart', cartRoutes);
-app.use('/orders', orderRoutes);
+// Routes
+app.use('/products', require('./routes/products'));
+app.use('/users', require('./routes/users'));
+app.use('/cart', require('./routes/cart'));
+app.use('/orders', require('./routes/orders'));
 
-// Global Error Handling Middleware
-const errorHandler = require('./middleware/errorHandler');
+// Error handler
 app.use(errorHandler);
 
-// Start server
+// Server
 app.listen(3000, () => {
   console.log('Server running on port 3000');
 });
+
